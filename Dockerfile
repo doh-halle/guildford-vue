@@ -37,7 +37,7 @@ RUN mix release
 
 # ---- Runtime stage ----
 # Pinned to the alpine:3.21 multi-arch index digest (Sprint 11.5 Slice 4).
-FROM alpine:3.21@sha256:48b0309ca019d89d40f670aa1bc06e426dc0931948452e8491e3d65087abc07d AS runtime
+FROM alpine:3.24@sha256:28bd5fe8b56d1bd048e5babf5b10710ebe0bae67db86916198a6eec434943f8b AS runtime
 
 # Chromium for ChromicPDF + ncurses/openssl for BEAM
 RUN apk add --no-cache openssl ncurses-libs libstdc++ chromium ca-certificates tini \
