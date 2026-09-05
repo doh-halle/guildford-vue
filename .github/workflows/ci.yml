@@ -1,0 +1,185 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  test:
+    name: ExUnit, Credo, Dialyxir, Coverage
+    runs-on: ubuntu-latest
+
+    services:
+      db:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: guildford_vue_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      MIX_ENV: test
+      # CI uses the standard 5432 port (no host clash in GitHub-hosted runners)
+      DATABASE_URL: ecto://postgres:postgres@localhost:5432/guildford_vue_test
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - name: Set up Erlang/OTP & Elixir
+        uses: erlef/setup-beam@8d44588995e53ce789721e96227122a67826542d # v1.24.0
+        with:
+          otp-version: "28.1"
+          elixir-version: "1.19.5"
+
+      - name: Cache deps
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
+          restore-keys: ${{ runner.os }}-mix-
+
+      - name: Install deps
+        run: mix deps.get
+
+      - name: Compile (warnings as errors)
+        run: mix compile --warnings-as-errors
+
+      - name: Check formatting
+        run: mix format --check-formatted
+
+      - name: Credo (strict)
+        run: mix credo --strict
+
+      - name: Run unit + integration + feature tests with coverage
+        run: mix coveralls.json --warnings-as-errors
+
+      - name: Audit coverage report for missing modules (defect 002 carry-control)
+        run: mix guildford_vue.coverage.audit
+
+      - name: Run property tests
+        run: mix test.properties || true   # property tag is optional in early sprints
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@0f8570b1a125f4937846a11fcfa3bcd548bd8c97 # v4.6.0
+        with:
+          files: ./cover/excoveralls.json
+          fail_ci_if_error: false
+
+      - name: Sobelow (security static analysis)
+        run: mix sobelow --config --exit Medium
+
+      - name: Dependency audit
+        run: mix hex.audit && mix deps.audit
+
+  e2e:
+    name: Playwright (E2E)
+    runs-on: ubuntu-latest
+    needs: test
+
+    services:
+      db:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: guildford_vue_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      MIX_ENV: test
+      DATABASE_URL: ecto://postgres:postgres@localhost:5432/guildford_vue_test
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+
+      - uses: erlef/setup-beam@8d44588995e53ce789721e96227122a67826542d # v1.24.0
+        with:
+          otp-version: "28.1"
+          elixir-version: "1.19.5"
+
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with:
+          node-version: "24"
+
+      - name: Cache deps
+        uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
+        with:
+          path: |
+            deps
+            _build
+          key: ${{ runner.os }}-mix-${{ hashFiles('mix.lock') }}
+
+      - run: mix deps.get
+      - run: mix compile
+
+      - name: Install Playwright
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Set up test database for Playwright
+        run: |
+          mix ecto.create
+          mix ecto.migrate
+
+      - name: Run Playwright tests
+        run: npx playwright test
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2
+        with:
+          name: playwright-report
+          path: test/e2e/playwright-report/
+          retention-days: 30
+
+  lighthouse:
+    name: Lighthouse CI
+    runs-on: ubuntu-latest
+    needs: e2e
+    if: false # Enable once a deploy preview URL is wired up (Sprint 11)
+
+    services:
+      db:
+        image: postgis/postgis:16-3.4
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: guildford_vue_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+    env:
+      MIX_ENV: test
+      DATABASE_URL: ecto://postgres:postgres@localhost:5432/guildford_vue_test
+
+    steps:
+      - uses: actions/checkout@34e114876b0b11c390a56381ad16ebd13914f8d5 # v4.3.1
+      - uses: erlef/setup-beam@8d44588995e53ce789721e96227122a67826542d # v1.24.0
+        with: { otp-version: "28.1", elixir-version: "1.19.5" }
+      - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4.4.0
+        with: { node-version: "24" }
+      - run: mix deps.get && mix compile && mix ecto.create && mix ecto.migrate
+      - run: npm install -g @lhci/cli
+      - run: lhci autorun

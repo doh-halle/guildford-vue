@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="Guildford Vue" suffix=" · UK Exam Booking" phx-no-format>{assigns[:page_title]}</.live_title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+    <link phx-track-static rel="stylesheet" href={~p"/assets/css/app.css"} />
+    <%!--
+      Leaflet (PRD §4.5 map view). Pinned to 1.9.4 with SRI hashes;
+      CSP `script-src` and `style-src` explicitly allow unpkg.com so
+      a hostile mirror can't inject a different bundle.
+    --%>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    >
+    </script>
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/js/app.js"}>
+    </script>
+  </head>
+  <body>
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:left-2 focus:top-2 focus:z-50 focus:rounded-lg focus:bg-teal-700 focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:text-white"
+    >
+      Skip to main content
+    </a>
+
+    <nav
+      aria-label="Account"
+      class="flex w-full flex-wrap items-center justify-end gap-3 border-b border-ink-200 bg-white px-4 py-3 text-sm sm:px-6 lg:px-8"
+    >
+      <%!--
+        One chip per active scope. Renders independently — multiple
+        scopes can co-exist in the same browser (different cookies)
+        and the user needs to see + log out each one.
+        (Closes Sprint 1c defect 003.)
+      --%>
+      <%= if candidate = assigns[:current_candidate] do %>
+        <div class="flex items-center gap-2" data-scope-chip="candidate">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-teal-700">
+            Candidate
+          </span>
+          <span class="font-medium text-ink-700">{candidate.email}</span>
+          <.link href={~p"/candidate/settings"} class="text-teal-700 hover:underline">
+            Settings
+          </.link>
+          <.link
+            href={~p"/candidate/logout"}
+            method="delete"
+            class="text-ink-600 hover:text-ink-900"
+          >
+            Log out
+          </.link>
+        </div>
+      <% end %>
+
+      <%= if admin = assigns[:current_admin] do %>
+        <div class="flex items-center gap-2" data-scope-chip="admin">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-orange-700">
+            Back office
+          </span>
+          <span class="font-medium text-ink-700">{admin.email}</span>
+          <.link href={~p"/backoffice/settings"} class="text-teal-700 hover:underline">
+            Settings
+          </.link>
+          <.link
+            href={~p"/backoffice/logout"}
+            method="delete"
+            class="text-ink-600 hover:text-ink-900"
+          >
+            Log out
+          </.link>
+        </div>
+      <% end %>
+
+      <%= if centre = assigns[:current_exam_centre] do %>
+        <div class="flex items-center gap-2" data-scope-chip="exam-centre">
+          <span class="font-mono text-[10px] uppercase tracking-widest text-indigo-700">
+            Exam centre
+          </span>
+          <span class="font-medium text-ink-700">{centre.email}</span>
+          <.link href={~p"/examcenter/settings"} class="text-teal-700 hover:underline">
+            Settings
+          </.link>
+          <.link
+            href={~p"/examcenter/logout"}
+            method="delete"
+            class="text-ink-600 hover:text-ink-900"
+          >
+            Log out
+          </.link>
+        </div>
+      <% end %>
+
+      <%= if !assigns[:current_candidate] && !assigns[:current_admin] && !assigns[:current_exam_centre] do %>
+        <.link href={~p"/candidate/login"} class="text-ink-600 hover:text-ink-900">
+          Candidate
+        </.link>
+        <.link href={~p"/examcenter/login"} class="text-ink-600 hover:text-ink-900">
+          Exam centre
+        </.link>
+        <.link href={~p"/backoffice/login"} class="text-ink-600 hover:text-ink-900">
+          Back office
+        </.link>
+      <% end %>
+    </nav>
+
+    <%= if announcement = assigns[:current_announcement] do %>
+      <aside
+        aria-label="Platform announcement"
+        role="status"
+        class="border-b border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900 sm:px-6 lg:px-8"
+        data-test-id="announcement-banner"
+      >
+        <p class="mx-auto max-w-container font-medium">{announcement.text}</p>
+      </aside>
+    <% end %>
+
+    <div id="main-content" tabindex="-1">
+      {@inner_content}
+    </div>
+  </body>
+</html>

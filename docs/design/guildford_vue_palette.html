@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guildford Vue — Typography Option B · Manrope</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   Guildford Vue Typography — Option B
+   Manrope (display + body) · IBM Plex Mono (technical)
+   Aesthetic: humanist, approachable, warm-professional
+   Reference: Notion, modern public services, friendly SaaS
+   ============================================================ */
+
+:root {
+  --teal-50:  #F0FDFA; --teal-100: #CCFBF1; --teal-200: #99F6E4;
+  --teal-300: #5EEAD4; --teal-400: #2DD4BF; --teal-500: #14B8A6;
+  --teal-600: #0D9488; --teal-700: #0F766E; --teal-800: #115E59;
+  --teal-900: #134E4A; --teal-950: #042F2E;
+
+  --orange-50:  #FFF7ED; --orange-100: #FFEDD5; --orange-200: #FED7AA;
+  --orange-300: #FDBA74; --orange-400: #FB923C; --orange-500: #F97316;
+  --orange-600: #EA580C; --orange-700: #C2410C; --orange-800: #9A3412;
+  --orange-900: #7C2D12; --orange-950: #431407;
+
+  --white: #FFFFFF;
+  --ink-50:  #F8FAFC; --ink-100: #F1F5F9; --ink-200: #E2E8F0;
+  --ink-300: #CBD5E1; --ink-400: #94A3B8; --ink-500: #64748B;
+  --ink-600: #475569; --ink-700: #334155; --ink-800: #1E293B;
+  --ink-900: #0F172A; --ink-950: #020617;
+
+  --sans: 'Manrope', system-ui, -apple-system, sans-serif;
+  --mono: 'IBM Plex Mono', 'SF Mono', Consolas, monospace;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--ink-50);
+  color: var(--ink-800);
+  font-family: var(--sans);
+  font-weight: 400;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.container { max-width: 1600px; margin: 0 auto; padding: 0 4rem; }
+
+/* ============= HERO ============= */
+.hero {
+  background: var(--teal-950);
+  color: var(--ink-50);
+  padding: 5rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  right: -8%; bottom: -30%;
+  width: 55%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--orange-700) 0%, transparent 60%);
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  left: -10%; top: -30%;
+  width: 45%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--teal-600) 0%, transparent 65%);
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6rem;
+  align-items: end;
+  position: relative;
+  z-index: 1;
+}
+
+.hero-eyebrow {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--teal-300);
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.hero-eyebrow::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--teal-700);
+}
+
+.hero-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(3rem, 8vw, 7rem);
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+  color: var(--ink-50);
+}
+
+.hero-title .accent { color: var(--orange-400); }
+.hero-title .sep { color: var(--teal-400); font-weight: 200; }
+
+.hero-meta {
+  font-family: var(--sans);
+  font-size: 1.0625rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--teal-200);
+  max-width: 32rem;
+}
+
+.hero-meta strong { color: var(--ink-50); font-weight: 600; }
+.hero-meta .emph-orange { color: var(--orange-300); font-weight: 600; }
+
+.hero-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 2rem;
+}
+
+.hero-tag {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--teal-300);
+  border: 1px solid var(--teal-700);
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+}
+
+.hero-tag.is-orange {
+  color: var(--orange-300);
+  border-color: var(--orange-700);
+}
+
+/* ============= SECTION HEADERS ============= */
+.section {
+  padding: 7rem 0 5rem;
+  position: relative;
+}
+
+.section.has-warm-band {
+  background: linear-gradient(to bottom, var(--orange-50) 0%, transparent 30%);
+}
+
+.section-header {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 5rem;
+  align-items: end;
+  margin-bottom: 4rem;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--orange-700);
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-label::before {
+  content: '';
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+}
+
+.section-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--ink-900);
+  margin-top: 0.75rem;
+}
+
+.section-title .accent { color: var(--orange-700); }
+
+.section-deck {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--ink-700);
+  max-width: 38rem;
+}
+
+/* ============= FAMILY SECTIONS ============= */
+.family { margin-bottom: 4rem; }
+
+.family-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  border: 1px solid var(--ink-200);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 2.5rem;
+}
+
+.family-swatch-large {
+  aspect-ratio: 16 / 11;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem;
+  position: relative;
+}
+
+.family-swatch-large.teal { background: var(--teal-700); color: var(--ink-50); }
+.family-swatch-large.orange { background: var(--orange-700); color: var(--ink-50); }
+.family-swatch-large.ink { background: var(--ink-800); color: var(--ink-50); }
+
+.family-swatch-large::after {
+  content: '';
+  position: absolute;
+  top: 2.5rem; right: 2.5rem;
+  width: 0.75rem; height: 0.75rem;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.6;
+}
+
+.swatch-token-tag {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  opacity: 0.75;
+}
+
+.swatch-name-display {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 4vw, 3.5rem);
+  line-height: 1;
+  letter-spacing: -0.035em;
+}
+
+.swatch-hex {
+  font-family: var(--mono);
+  font-size: 1.375rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  margin-top: auto;
+}
+
+.family-meta {
+  background: var(--white);
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-left: 1px solid var(--ink-200);
+}
+
+.family-meta-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: 0.75rem;
+}
+
+.family-meta-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.5rem;
+  line-height: 1.25;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  margin-bottom: 1rem;
+}
+
+.family-meta p {
+  color: var(--ink-700);
+  font-size: 0.9375rem;
+  line-height: 1.65;
+  margin-bottom: 0.875rem;
+}
+
+.family-meta p:last-child { margin-bottom: 0; }
+
+.family-callout {
+  background: var(--orange-50);
+  border-left: 3px solid var(--orange-700);
+  padding: 1rem 1.25rem;
+  margin-top: 1.25rem;
+  font-size: 0.875rem;
+  line-height: 1.55;
+}
+
+.family-callout-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--orange-800);
+  margin-bottom: 0.4rem;
+  display: block;
+}
+
+/* ============= SCALE STRIP ============= */
+.scale {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  border: 1px solid var(--ink-200);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.scale-step {
+  aspect-ratio: 1 / 1.7;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 0.875rem 0.75rem;
+  transition: transform 0.2s ease;
+}
+
+.scale-step:hover { transform: scale(1.03); z-index: 5; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
+.scale-step.is-brand { outline: 2px solid var(--ink-800); outline-offset: -2px; }
+
+.scale-step-token {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.scale-step-hex {
+  font-family: var(--mono);
+  font-size: 0.625rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  opacity: 0.8;
+}
+
+.scale-step.dark-text { color: var(--ink-800); }
+.scale-step.light-text { color: var(--ink-50); }
+
+/* ============= COMPONENTS SHOWCASE ============= */
+.showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.showcase-card {
+  background: var(--white);
+  border: 1px solid var(--ink-200);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.showcase-card.span-4 { grid-column: span 4; }
+
+.showcase-card-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--orange-700);
+  margin-bottom: 0.5rem;
+}
+
+.showcase-card-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.25rem;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--ink-900);
+  margin-bottom: 1.5rem;
+}
+
+.showcase-card-stage {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.85rem;
+  padding: 2rem 1rem;
+  background: var(--ink-50);
+  border-radius: 8px;
+  border: 1px dashed var(--ink-200);
+  min-height: 200px;
+}
+
+.showcase-card-note {
+  font-size: 0.8125rem;
+  line-height: 1.55;
+  color: var(--ink-600);
+  margin-top: 1rem;
+}
+
+.showcase-card-note code {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  background: var(--ink-100);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--ink-800);
+  font-weight: 500;
+}
+
+/* ============= BUTTONS ============= */
+.demo-btn {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.005em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.demo-btn:hover { transform: translateY(-1px); }
+.demo-btn.primary { background: var(--teal-700); color: var(--white); }
+.demo-btn.primary:hover { background: var(--teal-600); box-shadow: 0 4px 12px rgba(15, 118, 110, 0.25); }
+.demo-btn.accent { background: var(--orange-700); color: var(--white); }
+.demo-btn.accent:hover { background: var(--orange-600); box-shadow: 0 4px 12px rgba(194, 65, 12, 0.25); }
+.demo-btn.secondary { background: var(--white); color: var(--ink-900); border: 2px solid var(--ink-900); }
+.demo-btn.secondary:hover { background: var(--ink-50); }
+.demo-btn.ghost { background: var(--ink-100); color: var(--ink-700); }
+.demo-btn.ghost:hover { background: var(--ink-200); }
+
+/* ============= STATUS BADGES ============= */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+.status-badge .dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+}
+
+.status-badge.available { background: var(--teal-100); color: var(--teal-900); }
+.status-badge.available .dot { background: var(--teal-700); }
+
+.status-badge.limited { background: var(--orange-100); color: var(--orange-900); }
+.status-badge.limited .dot { background: var(--orange-700); }
+
+.status-badge.fully-booked { background: var(--ink-200); color: var(--ink-900); }
+.status-badge.fully-booked .dot { background: var(--ink-600); }
+
+.confirmed-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.45rem 0.95rem;
+  border-radius: 999px;
+  background: var(--orange-700);
+  color: var(--white);
+  font-family: var(--sans);
+  font-size: 0.8125rem;
+  font-weight: 600;
+}
+
+/* ============= TYPOGRAPHY DEMO ============= */
+.type-demo { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.type-h1 {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+  color: var(--ink-900);
+  line-height: 1.2;
+}
+
+.type-h2 {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  letter-spacing: -0.012em;
+  color: var(--ink-700);
+}
+
+.type-body { color: var(--ink-600); font-size: 0.9375rem; }
+.type-muted { color: var(--ink-500); font-size: 0.875rem; }
+.type-link { color: var(--teal-700); font-weight: 600; font-size: 0.9375rem; }
+.type-accent { color: var(--orange-700); font-weight: 600; font-size: 0.9375rem; }
+.type-mono { font-family: var(--mono); color: var(--ink-500); font-size: 0.8125rem; font-weight: 500; }
+
+/* ============= PAIRINGS ============= */
+.pairings {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+
+.pairing {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid var(--ink-200);
+}
+
+.pairing-canvas {
+  aspect-ratio: 16 / 8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem;
+  position: relative;
+}
+
+.pairing-1 .pairing-canvas { background: var(--teal-800); color: var(--orange-300); }
+.pairing-2 .pairing-canvas { background: var(--ink-900); color: var(--orange-400); }
+.pairing-3 .pairing-canvas { background: var(--ink-50); color: var(--teal-700); }
+.pairing-4 .pairing-canvas { background: var(--orange-50); color: var(--teal-800); }
+
+.pairing-canvas-text {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  text-align: center;
+}
+
+.pairing-meta {
+  background: var(--white);
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--ink-200);
+}
+
+.pairing-meta-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--ink-700);
+  margin-bottom: 0.4rem;
+}
+
+.pairing-meta-use {
+  font-size: 0.875rem;
+  color: var(--ink-600);
+  line-height: 1.55;
+}
+
+/* ============= CONTRAST TABLE ============= */
+.contrast-table {
+  background: var(--white);
+  border: 1px solid var(--ink-200);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+.contrast-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1.2fr 1.4fr 0.6fr;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--ink-100);
+  gap: 1.5rem;
+}
+
+.contrast-row:last-child { border-bottom: none; }
+
+.contrast-row-header {
+  background: var(--ink-50);
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-700);
+  font-weight: 600;
+}
+
+.contrast-cell { display: flex; align-items: center; }
+
+.contrast-sample {
+  font-family: var(--sans);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.008em;
+  padding: 0.75rem 1.25rem;
+  border-radius: 6px;
+  text-align: center;
+  justify-content: center;
+  min-width: 180px;
+}
+
+.contrast-ratio {
+  font-family: var(--mono);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--ink-800);
+  text-align: right;
+  justify-content: flex-end;
+}
+
+/* ============= DISCIPLINE ============= */
+.discipline {
+  background: var(--ink-950);
+  color: var(--ink-100);
+  padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.discipline::before {
+  content: '';
+  position: absolute;
+  right: -10%; top: -20%;
+  width: 50%; aspect-ratio: 1;
+  background: radial-gradient(circle, var(--teal-700) 0%, transparent 60%);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.discipline-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 5rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.discipline-title {
+  font-family: var(--sans);
+  font-weight: 800;
+  font-size: clamp(2.25rem, 4.5vw, 4rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: var(--ink-50);
+}
+
+.discipline-title .accent { color: var(--orange-400); }
+
+.discipline-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  list-style: none;
+}
+
+.discipline-list li {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ink-800);
+}
+
+.discipline-number {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: var(--orange-400);
+}
+
+.discipline-body {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--ink-300);
+}
+
+.discipline-body strong { color: var(--ink-50); font-weight: 700; }
+
+/* ============= FOOTER ============= */
+footer {
+  background: var(--ink-900);
+  color: var(--ink-300);
+  padding: 4rem 0;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem;
+}
+
+.footer-brand {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.25rem;
+  letter-spacing: -0.022em;
+  color: var(--ink-50);
+  margin-bottom: 1rem;
+}
+
+.footer-brand .accent { color: var(--orange-400); font-weight: 600; }
+
+.footer-meta-label {
+  font-family: var(--mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ink-500);
+  margin-bottom: 0.6rem;
+}
+
+.footer-meta-value {
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  color: var(--ink-300);
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+/* ============= TYPOGRAPHY SHOWCASE BANNER ============= */
+.typo-banner {
+  background: var(--orange-50);
+  border: 1px solid var(--orange-200);
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  margin-bottom: 4rem;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.typo-banner-label {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--orange-700);
+  margin-bottom: 0.5rem;
+}
+
+.typo-banner-title {
+  font-family: var(--sans);
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.025em;
+  color: var(--ink-900);
+}
+
+.typo-banner-detail {
+  display: flex;
+  gap: 2.5rem;
+  font-size: 0.875rem;
+  color: var(--ink-700);
+}
+
+.typo-banner-detail strong {
+  color: var(--ink-900);
+  font-weight: 700;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.typo-banner-detail code {
+  font-family: var(--mono);
+  background: var(--white);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+  color: var(--ink-800);
+  font-weight: 500;
+  font-size: 0.8125rem;
+}
+
+@media (max-width: 1024px) {
+  .container { padding: 0 2rem; }
+  .hero-grid, .section-header, .pairings, .discipline-grid, .typo-banner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .family-hero { grid-template-columns: 1fr; }
+  .family-meta { border-left: none; border-top: 1px solid var(--ink-200); }
+  .showcase-card.span-4 { grid-column: span 12; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== HERO ==================== -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <p class="hero-eyebrow">Design Tokens · Typography B</p>
+        <h1 class="hero-title">
+          Teal<span class="sep">,</span><br>
+          <span class="accent">Orange</span><br>
+          &amp; Ink<span class="sep">.</span>
+        </h1>
+      </div>
+      <div>
+        <p class="hero-meta">
+          The <strong>Guildford Vue</strong> design system runs on three colours doing real work. Teal anchors the brand. <span class="emph-orange">Orange does the warm work</span> — confirmations, calls to action, the moment your seat is yours. Ink is the structural foundation underneath.
+        </p>
+        <div class="hero-tags">
+          <span class="hero-tag">Manrope</span>
+          <span class="hero-tag is-orange">IBM Plex Mono</span>
+          <span class="hero-tag">WCAG AA · AAA</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== TYPOGRAPHY BANNER ==================== -->
+<section style="padding: 4rem 0 0; background: var(--ink-50);">
+  <div class="container">
+    <div class="typo-banner">
+      <div>
+        <p class="typo-banner-label">Option B · Humanist Approachable</p>
+        <h2 class="typo-banner-title">Manrope &amp; IBM Plex Mono</h2>
+      </div>
+      <div class="typo-banner-detail">
+        <div>
+          <strong>Manrope</strong>
+          Display + body · Weights 200–800<br>
+          <code>font-family: 'Manrope'</code>
+        </div>
+        <div>
+          <strong>IBM Plex Mono</strong>
+          Technical labels · Weights 400–700<br>
+          <code>font-family: 'IBM Plex Mono'</code>
+        </div>
+        <div>
+          <strong>References</strong>
+          Notion, GOV.UK adjacent, friendly SaaS
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FAMILIES ==================== -->
+<section class="section" style="padding-top: 1rem;">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">01 · Colour families</p>
+      <h2 class="section-title">Three colours, <span class="accent">doing real work.</span></h2>
+    </div>
+    <p class="section-deck">
+      Each family carries a distinct role. Teal anchors the brand and primary actions. Orange (at the 700 stop) drives confirmations and accents at AAA contrast. Ink supplies the typographic and structural foundation. Eleven tonal stops per family, all selected to compose without competing.
+    </p>
+
+    <!-- TEAL family -->
+    <div class="family" style="margin-top: 4rem;">
+      <div class="family-hero">
+        <div class="family-swatch-large teal">
+          <div><p class="swatch-token-tag">Teal-700</p></div>
+          <div>
+            <p class="swatch-name-display">Teal</p>
+            <p class="swatch-hex">#0F766E</p>
+          </div>
+        </div>
+        <div class="family-meta">
+          <div>
+            <p class="family-meta-label">Role · Primary brand</p>
+            <h3 class="family-meta-title">Trust, calm, authority.</h3>
+            <p>Teal anchors every page. Navigation chrome, primary CTAs, links, the brand mark itself. It communicates competence without the corporate sterility of pure blue.</p>
+            <p>Used proportionally across the interface. Hover state moves to <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">teal-600</code>; active state moves to <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">teal-800</code>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="scale">
+        <div class="scale-step dark-text" style="background: var(--teal-50);"><span class="scale-step-token">50</span><span class="scale-step-hex">#F0FDFA</span></div>
+        <div class="scale-step dark-text" style="background: var(--teal-100);"><span class="scale-step-token">100</span><span class="scale-step-hex">#CCFBF1</span></div>
+        <div class="scale-step dark-text" style="background: var(--teal-200);"><span class="scale-step-token">200</span><span class="scale-step-hex">#99F6E4</span></div>
+        <div class="scale-step dark-text" style="background: var(--teal-300);"><span class="scale-step-token">300</span><span class="scale-step-hex">#5EEAD4</span></div>
+        <div class="scale-step dark-text" style="background: var(--teal-400);"><span class="scale-step-token">400</span><span class="scale-step-hex">#2DD4BF</span></div>
+        <div class="scale-step light-text" style="background: var(--teal-500);"><span class="scale-step-token">500</span><span class="scale-step-hex">#14B8A6</span></div>
+        <div class="scale-step light-text" style="background: var(--teal-600);"><span class="scale-step-token">600</span><span class="scale-step-hex">#0D9488</span></div>
+        <div class="scale-step light-text is-brand" style="background: var(--teal-700);"><span class="scale-step-token">700 · brand</span><span class="scale-step-hex">#0F766E</span></div>
+        <div class="scale-step light-text" style="background: var(--teal-800);"><span class="scale-step-token">800</span><span class="scale-step-hex">#115E59</span></div>
+        <div class="scale-step light-text" style="background: var(--teal-900);"><span class="scale-step-token">900</span><span class="scale-step-hex">#134E4A</span></div>
+        <div class="scale-step light-text" style="background: var(--teal-950);"><span class="scale-step-token">950</span><span class="scale-step-hex">#042F2E</span></div>
+      </div>
+    </div>
+
+    <!-- ORANGE family -->
+    <div class="family">
+      <div class="family-hero">
+        <div class="family-swatch-large orange">
+          <div><p class="swatch-token-tag">Orange-700</p></div>
+          <div>
+            <p class="swatch-name-display">Orange</p>
+            <p class="swatch-hex">#C2410C</p>
+          </div>
+        </div>
+        <div class="family-meta">
+          <div>
+            <p class="family-meta-label">Role · Accent &amp; confirmation</p>
+            <h3 class="family-meta-title">Energy, warmth, focus.</h3>
+            <p>Orange does the warm work. The CTA that says "yes, book this slot". The "limited availability" indicator. The filled confirmation badge that earns its weight.</p>
+            <p>The brand stop is <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">orange-700</code>. White on orange-700 clears 7.45, comfortably AAA. Orange-700 carries body text, ribbons, and badges without caveat.</p>
+            <div class="family-callout">
+              <span class="family-callout-label">Upgrade · v1</span>
+              The brand accent moved from orange-600 to orange-700 to clear WCAG AAA. The hue is virtually indistinguishable to the eye; the accessibility gain is meaningful.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="scale">
+        <div class="scale-step dark-text" style="background: var(--orange-50);"><span class="scale-step-token">50</span><span class="scale-step-hex">#FFF7ED</span></div>
+        <div class="scale-step dark-text" style="background: var(--orange-100);"><span class="scale-step-token">100</span><span class="scale-step-hex">#FFEDD5</span></div>
+        <div class="scale-step dark-text" style="background: var(--orange-200);"><span class="scale-step-token">200</span><span class="scale-step-hex">#FED7AA</span></div>
+        <div class="scale-step dark-text" style="background: var(--orange-300);"><span class="scale-step-token">300</span><span class="scale-step-hex">#FDBA74</span></div>
+        <div class="scale-step dark-text" style="background: var(--orange-400);"><span class="scale-step-token">400</span><span class="scale-step-hex">#FB923C</span></div>
+        <div class="scale-step light-text" style="background: var(--orange-500);"><span class="scale-step-token">500</span><span class="scale-step-hex">#F97316</span></div>
+        <div class="scale-step light-text" style="background: var(--orange-600);"><span class="scale-step-token">600</span><span class="scale-step-hex">#EA580C</span></div>
+        <div class="scale-step light-text is-brand" style="background: var(--orange-700);"><span class="scale-step-token">700 · brand</span><span class="scale-step-hex">#C2410C</span></div>
+        <div class="scale-step light-text" style="background: var(--orange-800);"><span class="scale-step-token">800</span><span class="scale-step-hex">#9A3412</span></div>
+        <div class="scale-step light-text" style="background: var(--orange-900);"><span class="scale-step-token">900</span><span class="scale-step-hex">#7C2D12</span></div>
+        <div class="scale-step light-text" style="background: var(--orange-950);"><span class="scale-step-token">950</span><span class="scale-step-hex">#431407</span></div>
+      </div>
+    </div>
+
+    <!-- INK family -->
+    <div class="family">
+      <div class="family-hero">
+        <div class="family-swatch-large ink">
+          <div><p class="swatch-token-tag">Ink-800</p></div>
+          <div>
+            <p class="swatch-name-display">Ink</p>
+            <p class="swatch-hex">#1E293B</p>
+          </div>
+        </div>
+        <div class="family-meta">
+          <div>
+            <p class="family-meta-label">Role · Structural neutrals</p>
+            <h3 class="family-meta-title">Sophistication, hierarchy, depth.</h3>
+            <p>Ink carries the typography, the surfaces, the borders, the considered moments. A cool slate-blue grey, never neutral grey — the temperature ties it to the rest of the palette.</p>
+            <p>Body text sits at <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">ink-600</code>. Headings at <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">ink-900</code>. Premium dark surfaces sit at <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">ink-800</code> through <code style="font-family: var(--mono); font-size: 0.875em; background: var(--ink-100); padding: 0.1rem 0.4rem; border-radius: 4px;">ink-950</code>.</p>
+          </div>
+        </div>
+      </div>
+      <div class="scale">
+        <div class="scale-step dark-text" style="background: var(--ink-50);"><span class="scale-step-token">50</span><span class="scale-step-hex">#F8FAFC</span></div>
+        <div class="scale-step dark-text" style="background: var(--ink-100);"><span class="scale-step-token">100</span><span class="scale-step-hex">#F1F5F9</span></div>
+        <div class="scale-step dark-text" style="background: var(--ink-200);"><span class="scale-step-token">200</span><span class="scale-step-hex">#E2E8F0</span></div>
+        <div class="scale-step dark-text" style="background: var(--ink-300);"><span class="scale-step-token">300</span><span class="scale-step-hex">#CBD5E1</span></div>
+        <div class="scale-step dark-text" style="background: var(--ink-400);"><span class="scale-step-token">400</span><span class="scale-step-hex">#94A3B8</span></div>
+        <div class="scale-step light-text" style="background: var(--ink-500);"><span class="scale-step-token">500</span><span class="scale-step-hex">#64748B</span></div>
+        <div class="scale-step light-text" style="background: var(--ink-600);"><span class="scale-step-token">600</span><span class="scale-step-hex">#475569</span></div>
+        <div class="scale-step light-text" style="background: var(--ink-700);"><span class="scale-step-token">700</span><span class="scale-step-hex">#334155</span></div>
+        <div class="scale-step light-text is-brand" style="background: var(--ink-800);"><span class="scale-step-token">800 · brand</span><span class="scale-step-hex">#1E293B</span></div>
+        <div class="scale-step light-text" style="background: var(--ink-900);"><span class="scale-step-token">900</span><span class="scale-step-hex">#0F172A</span></div>
+        <div class="scale-step light-text" style="background: var(--ink-950);"><span class="scale-step-token">950</span><span class="scale-step-hex">#020617</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== IN USE ==================== -->
+<section class="section has-warm-band">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">02 · In use</p>
+      <h2 class="section-title">The tokens at <span class="accent">working scale.</span></h2>
+    </div>
+    <p class="section-deck">Buttons, status indicators, typography, the filled confirmation pill. Each component pulls from one of three families; nothing is invented locally.</p>
+
+    <div class="showcase-grid">
+      <div class="showcase-card span-4">
+        <p class="showcase-card-label">Buttons</p>
+        <h3 class="showcase-card-title">Action hierarchy</h3>
+        <div class="showcase-card-stage">
+          <button class="demo-btn primary">Book this slot</button>
+          <button class="demo-btn accent">Confirm payment</button>
+          <button class="demo-btn secondary">Cancel</button>
+          <button class="demo-btn ghost">Skip for now</button>
+        </div>
+        <p class="showcase-card-note">Primary <code>teal-700</code>. Accent <code>orange-700</code> for the warm moment. Secondary outline <code>ink-900</code>. Ghost <code>ink-100</code>.</p>
+      </div>
+
+      <div class="showcase-card span-4">
+        <p class="showcase-card-label">Status indicators</p>
+        <h3 class="showcase-card-title">Slot availability</h3>
+        <div class="showcase-card-stage">
+          <div class="status-badge available"><span class="dot"></span> Available · 12 slots</div>
+          <div class="status-badge limited"><span class="dot"></span> Limited · 3 left</div>
+          <div class="status-badge fully-booked"><span class="dot"></span> Fully booked</div>
+          <div class="confirmed-pill">✓ Booking confirmed</div>
+        </div>
+        <p class="showcase-card-note">Tinted badges for status. Filled pill <code>orange-700</code> for the confirmed-and-paid moment.</p>
+      </div>
+
+      <div class="showcase-card span-4">
+        <p class="showcase-card-label">Typography</p>
+        <h3 class="showcase-card-title">Hierarchy in ink</h3>
+        <div class="showcase-card-stage">
+          <div class="type-demo">
+            <p class="type-h1">Reserve your seat</p>
+            <p class="type-h2">Manchester · Tuesday 14:00</p>
+            <p class="type-body">CompTIA Security+ · 90 minutes · £215</p>
+            <p class="type-mono">GV-2026-A4B7K9</p>
+            <p class="type-link">Download receipt →</p>
+            <p class="type-accent">Confirmation sent</p>
+          </div>
+        </div>
+        <p class="showcase-card-note">Headings <code>ink-900</code>, body <code>ink-600</code>, muted <code>ink-500</code>. Booking refs in IBM Plex Mono.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== PAIRINGS ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">03 · Pairing matrix</p>
+      <h2 class="section-title">Four <span class="accent">blessed pairings.</span></h2>
+    </div>
+    <p class="section-deck">With the palette held to two brand colours plus structural ink, the pairing matrix collapses to four canonical combinations. Each does a specific job and earns a specific moment.</p>
+
+    <div class="pairings">
+      <div class="pairing pairing-1">
+        <div class="pairing-canvas"><span class="pairing-canvas-text">From Guildford<br>to Glasgow</span></div>
+        <div class="pairing-meta">
+          <p class="pairing-meta-label">Teal-800 + Orange-300</p>
+          <p class="pairing-meta-use">Hero sections, marketing depth surfaces, nationwide-coverage messaging</p>
+        </div>
+      </div>
+      <div class="pairing pairing-2">
+        <div class="pairing-canvas"><span class="pairing-canvas-text">On the morning<br>of your test</span></div>
+        <div class="pairing-meta">
+          <p class="pairing-meta-label">Ink-900 + Orange-400</p>
+          <p class="pairing-meta-use">Premium dark surfaces, admin chrome, the considered editorial voice</p>
+        </div>
+      </div>
+      <div class="pairing pairing-3">
+        <div class="pairing-canvas"><span class="pairing-canvas-text">Find a seat<br>near you</span></div>
+        <div class="pairing-meta">
+          <p class="pairing-meta-label">Ink-50 + Teal-700</p>
+          <p class="pairing-meta-use">Default app surface — where most candidate pages live</p>
+        </div>
+      </div>
+      <div class="pairing pairing-4">
+        <div class="pairing-canvas"><span class="pairing-canvas-text">Your seat<br>is reserved.</span></div>
+        <div class="pairing-meta">
+          <p class="pairing-meta-label">Orange-50 + Teal-800</p>
+          <p class="pairing-meta-use">Confirmation cards, warm-tinted backgrounds, the just-booked moment</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== ACCESSIBILITY ==================== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <p class="section-label">04 · Accessibility · WCAG 2.2 AA</p>
+      <h2 class="section-title">Verified <span class="accent">contrast.</span></h2>
+    </div>
+    <p class="section-deck">All pairings clear WCAG 2.2 AA. Most clear AAA. Promoting the orange brand stop from 600 to 700 lifted white-on-orange from 4.61 (AA Large only) to 7.45 (full AAA) — orange-700 carries body text without caveat.</p>
+
+    <div class="contrast-table">
+      <div class="contrast-row contrast-row-header">
+        <div class="contrast-cell">Pairing</div>
+        <div class="contrast-cell" style="justify-content: center;">Sample</div>
+        <div class="contrast-cell">Use</div>
+        <div class="contrast-cell" style="justify-content: flex-end;">Ratio</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">white on teal-700</span></div>
+        <div class="contrast-sample" style="background: var(--teal-700); color: var(--white);">Book this slot</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Primary CTA</div>
+        <div class="contrast-ratio">5.51</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">white on teal-800</span></div>
+        <div class="contrast-sample" style="background: var(--teal-800); color: var(--white);">Hero headline</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Hero headlines, dense surfaces</div>
+        <div class="contrast-ratio">7.20</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">white on orange-700</span></div>
+        <div class="contrast-sample" style="background: var(--orange-700); color: var(--white);">Confirm payment</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Warm CTA, confirmation pills, ribbons</div>
+        <div class="contrast-ratio">7.45</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">teal-900 on orange-50</span></div>
+        <div class="contrast-sample" style="background: var(--orange-50); color: var(--teal-900);">Reservation confirmed</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Confirmation callout titles</div>
+        <div class="contrast-ratio">13.04</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">orange-700 on white</span></div>
+        <div class="contrast-sample" style="background: var(--white); color: var(--orange-700);">Section labels &amp; accents</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Orange text on white</div>
+        <div class="contrast-ratio">7.45</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">white on ink-800</span></div>
+        <div class="contrast-sample" style="background: var(--ink-800); color: var(--white);">Admin dashboard chrome</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Admin chrome, premium dark surfaces</div>
+        <div class="contrast-ratio">14.58</div>
+      </div>
+      <div class="contrast-row">
+        <div class="contrast-cell"><span style="font-family: var(--mono); font-size: 0.8125rem; font-weight: 500;">ink-600 on white</span></div>
+        <div class="contrast-sample" style="background: var(--white); color: var(--ink-600);">Body text on cards</div>
+        <div class="contrast-cell" style="color: var(--ink-600); font-size: 0.875rem;">Secondary body text on cards</div>
+        <div class="contrast-ratio">7.36</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== DISCIPLINE ==================== -->
+<section class="discipline">
+  <div class="container">
+    <div class="discipline-grid">
+      <div>
+        <p class="hero-eyebrow" style="color: var(--orange-400); margin-bottom: 1.5rem;">05 · Discipline</p>
+        <h2 class="discipline-title">Five rules <span class="accent">nobody breaks.</span></h2>
+      </div>
+      <ol class="discipline-list">
+        <li>
+          <span class="discipline-number">01</span>
+          <span class="discipline-body"><strong>Teal anchors the page.</strong> Every screen has at least one teal-700 element. Orange is the partner, not the lead. If a page reads entirely orange-and-ink with no teal, the brand has slipped.</span>
+        </li>
+        <li>
+          <span class="discipline-number">02</span>
+          <span class="discipline-body"><strong>Orange does real work, but never alone.</strong> Orange can drive section labels, callouts, alert states, ribbons, and the confirmed-booking pill. But every surface needs at least one teal element to anchor it.</span>
+        </li>
+        <li>
+          <span class="discipline-number">03</span>
+          <span class="discipline-body"><strong>Ink is for the considered moments.</strong> Admin chrome. Audit logs. The supervision-tree health view. Ink signals "considered, sophisticated, distinctly not marketing-emphasis."</span>
+        </li>
+        <li>
+          <span class="discipline-number">04</span>
+          <span class="discipline-body"><strong>The CONFIRMED badge is filled, not tinted.</strong> Status badges are tinted (light bg + dark text). The confirmed-booking pill is filled (<code style="font-family: var(--mono); font-size: 0.875em; color: var(--teal-200);">orange-700</code> bg, white text) — the booked-and-paid moment earns its visual weight.</span>
+        </li>
+        <li>
+          <span class="discipline-number">05</span>
+          <span class="discipline-body"><strong>The tokens file is the source of truth.</strong> No ad-hoc hex values in components. Reach for <code style="font-family: var(--mono); font-size: 0.875em; color: var(--teal-200);">bg-orange-700</code> — never <code style="font-family: var(--mono); font-size: 0.875em; color: var(--teal-200);">bg-[#C2410C]</code>. CI hooks catch the latter.</span>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== FOOTER ==================== -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Guildford Vue Design Tokens · <span class="accent">Option B</span></p>
+        <p style="font-size: 0.9375rem; color: var(--ink-600); line-height: 1.6; max-width: 32rem;">
+          Humanist, approachable typography. Manrope for display and body, IBM Plex Mono for technical labels. Warm but professional — the feel of a modern public service or friendly SaaS.
+        </p>
+      </div>
+      <div>
+        <p class="footer-meta-label">Typography</p>
+        <p class="footer-meta-value">Manrope 200–800<br>IBM Plex Mono 400–700<br>Open counters<br>Variable fonts</p>
+      </div>
+      <div>
+        <p class="footer-meta-label">Character</p>
+        <p class="footer-meta-value">Humanist<br>Approachable<br>Warm<br>Professional</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

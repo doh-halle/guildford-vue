@@ -1,0 +1,10 @@
+{
+  "iterations": 500,
+  "successes": 500,
+  "elapsed_ms": 83776,
+  "throughput_per_s": 5.97,
+  "p50_us": 163657,
+  "p95_us": 213755,
+  "p99_us": 256384,
+  "max_us": 388119
+}

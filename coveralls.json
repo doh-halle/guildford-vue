@@ -1,0 +1,29 @@
+{
+  "_comment": "ExCoveralls config. We exclude Phoenix-generated scaffolds and small entry-point modules from the in-scope denominator so the 90% line / 85% branch thresholds are measured against code we actually own. As features land, fewer files will need exclusion.",
+  "skip_files": [
+    "lib/guildford_vue.ex",
+    "lib/guildford_vue/mailer.ex",
+    "lib/guildford_vue/repo.ex",
+    "lib/guildford_vue/postgres_types.ex",
+    "deps/postgrex/lib/postgrex/type_module.ex",
+    "lib/guildford_vue/application.ex",
+    "lib/mix/tasks/guildford_vue.seed.admins.ex",
+    "lib/mix/tasks/guildford_vue.seed.exams.ex",
+    "lib/mix/tasks/guildford_vue.coverage.audit.ex",
+    "lib/mix/tasks/guildford_vue.bench.broadcast.ex",
+    "lib/mix/tasks/guildford_vue.bench.booking.ex",
+    "lib/guildford_vue/prom_ex.ex",
+    "lib/guildford_vue_web/endpoint.ex",
+    "lib/guildford_vue_web/telemetry.ex",
+    "lib/guildford_vue_web/components/core_components.ex",
+    "lib/guildford_vue_web/components/layouts.ex",
+    "lib/guildford_vue_web/controllers/page_html.ex",
+    "test/support/data_case.ex",
+    "test/support/conn_case.ex"
+  ],
+  "minimum_coverage": 90,
+  "coverage_options": {
+    "treat_no_relevant_lines_as_covered": true,
+    "output_dir": "cover/"
+  }
+}

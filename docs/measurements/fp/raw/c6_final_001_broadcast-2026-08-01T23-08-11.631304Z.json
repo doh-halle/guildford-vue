@@ -1,0 +1,10 @@
+{
+  "subscribers": 500,
+  "broadcasts": 10,
+  "delivered_samples": 5000,
+  "elapsed_ms": 38,
+  "p50_us": 790,
+  "p95_us": 2867,
+  "p99_us": 2970,
+  "max_us": 3039
+}

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE tsung SYSTEM "/usr/share/tsung/tsung-1.0.dtd">
+
+<!--
+  Sprint 12 Slice 6 — Tsung load test: LiveView WebSocket fanout.
+
+  Target: PRD §2.2 — 1,000+ concurrent subscribers receive
+  centre-slot updates within 500 ms p95. This script ramps to
+  10,000 concurrent WebSocket clients all subscribed to /search
+  to exercise the per-centre PubSub fanout under sustained load.
+
+  Pre-requisites:
+    * `MIX_ENV=prod mix release` against target host
+    * `/search?postcode=SW1A%201AA` returns 200 in a browser
+    * tsung 1.8+ on the load-gen box
+
+  Run: ./benchmarks/tools/tsung-runner.sh ws-fanout
+
+  Phases:
+    *  30s warmup at  100 connections/s
+    * 120s ramp to   1000 connections/s (target: 1k sustained)
+    * 600s sustain  10000 concurrent (PRD §8.3 stretch goal)
+-->
+
+<tsung loglevel="warning" version="1.0">
+
+  <clients>
+    <client host="localhost" use_controller_vm="true" maxusers="20000"/>
+  </clients>
+
+  <servers>
+    <server host="localhost" port="4000" type="tcp"/>
+  </servers>
+
+  <load>
+    <arrivalphase phase="1" duration="30" unit="second">
+      <users arrivalrate="100" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="2" duration="120" unit="second">
+      <users arrivalrate="500" unit="second"/>
+    </arrivalphase>
+    <arrivalphase phase="3" duration="600" unit="second">
+      <users arrivalrate="200" unit="second"/>
+    </arrivalphase>
+  </load>
+
+  <options>
+    <option name="websocket_path" value="/live/websocket?vsn=2.0.0"/>
+  </options>
+
+  <sessions>
+    <session name="ws-fanout" probability="100" type="ts_websocket">
+      <request>
+        <websocket type="connect" path="/live/websocket?vsn=2.0.0"/>
+      </request>
+
+      <!-- Phoenix LiveView join frame for /search (centred on SW1A 1AA).
+           The session_id + csrf_token would be captured from a prior
+           HTTP request in a real run; this baseline file shows the
+           wire shape so an operator can wire dynamic params via
+           Tsung's <setdynvars> blocks. -->
+      <request>
+        <websocket type="message">
+          ["1","1","lv:phx-search-1","phx_join",
+           {"url":"http://localhost:4000/search",
+            "redirect":null,
+            "params":{"_csrf_token":"PLACEHOLDER","_mounts":0}}]
+        </websocket>
+      </request>
+
+      <thinktime value="60" random="true"/>
+
+      <request>
+        <websocket type="message">
+          ["1","2","lv:phx-search-1","heartbeat",{}]
+        </websocket>
+      </request>
+
+      <thinktime value="30" random="true"/>
+
+      <request>
+        <websocket type="close"/>
+      </request>
+    </session>
+  </sessions>
+</tsung>

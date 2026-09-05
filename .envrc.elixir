@@ -1,0 +1,4 @@
+# sourced by scripts/* and CI-equivalent local steps
+for d in "$HOME"/.elixir-install/installs/otp/*/bin; do [ -d "$d" ] && PATH="$d:$PATH"; done
+for d in "$HOME"/.elixir-install/installs/elixir/*/bin; do [ -d "$d" ] && PATH="$d:$PATH"; done
+export PATH

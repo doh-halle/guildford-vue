@@ -1,0 +1,21 @@
+# Sobelow config — Sprint 11.5 Slice 4.
+#
+# Parsed as an Elixir keyword list by `Code.string_to_quoted/1`.
+#
+# `ignore: "Config.CSP"` suppresses Sobelow's `Config.CSP` finding
+# against the `:browser_base` pipeline. The CSP IS in fact set —
+# `GuildfordVueWeb.Plugs.SecureHeaders` (Sprint 1c) emits the full
+# `Content-Security-Policy` header on every response — but Sobelow
+# only inspects router pipelines, not custom plugs, so the finding
+# is a structural false positive. Suppressing keeps `mix sobelow
+# --config --exit Medium` actionable in CI (any *new* finding will
+# trip the gate).
+#
+# `verbose: true` so CI logs show the offending file:line on any
+# real finding without a second run.
+
+[
+  verbose: true,
+  skip: true,
+  ignore: "Config.CSP"
+]

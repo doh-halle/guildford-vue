@@ -1,0 +1,62 @@
+<Layouts.flash_group flash={@flash} />
+
+<main class="min-h-screen bg-ink-50">
+  <section class="mx-auto max-w-container px-6 pt-16 pb-24 sm:px-10 lg:pt-28">
+    <p class="font-mono text-xs uppercase tracking-widest text-orange-700">
+      Sprint 0 · Foundation
+    </p>
+    <h1 class="mt-4 max-w-3xl font-sans font-extrabold text-5xl leading-tight tracking-tight text-ink-900 sm:text-6xl">
+      Book your UK examination slot, <span class="text-teal-700">live and reliably</span>.
+    </h1>
+    <p class="mt-6 max-w-2xl text-lg text-ink-600">
+      Guildford Vue is a nationwide examination booking and reservation system
+      for candidates, exam centres, and platform administrators &mdash; built
+      on Elixir, Phoenix LiveView, and OTP. Real-time slot availability,
+      zero double-bookings, and a self-healing supervision tree.
+    </p>
+
+    <div class="mt-10 flex flex-wrap gap-4">
+      <a
+        href="/candidate/login"
+        class="inline-flex items-center gap-2 rounded-lg bg-teal-700 px-6 py-3 font-sans font-semibold text-white shadow-sm transition hover:bg-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+      >
+        Candidate sign in <span aria-hidden="true">→</span>
+      </a>
+      <a
+        href="/examcenter/login"
+        class="inline-flex items-center gap-2 rounded-lg border border-ink-200 bg-white px-6 py-3 font-sans font-semibold text-ink-900 transition hover:border-ink-300 hover:bg-ink-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+      >
+        Exam centre sign in
+      </a>
+      <a
+        href="/backoffice/login"
+        class="inline-flex items-center gap-2 rounded-lg border border-ink-200 bg-white px-6 py-3 font-sans font-semibold text-ink-700 transition hover:border-ink-300 hover:bg-ink-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+      >
+        Back office
+      </a>
+    </div>
+  </section>
+
+  <section
+    aria-labelledby="status-key"
+    class="mx-auto max-w-container px-6 pb-20 sm:px-10"
+  >
+    <h2 id="status-key" class="font-mono text-xs uppercase tracking-widest text-ink-500">
+      Slot availability key
+    </h2>
+    <div class="mt-4 flex flex-wrap items-center gap-3">
+      <span class="status-badge status-badge--available">
+        <span aria-hidden="true">●</span> Available
+      </span>
+      <span class="status-badge status-badge--limited">
+        <span aria-hidden="true">●</span> 1&ndash;5 slots
+      </span>
+      <span class="status-badge status-badge--fully-booked">
+        <span aria-hidden="true">●</span> Fully booked
+      </span>
+      <span class="confirmed-pill">
+        <span aria-hidden="true">✓</span> Confirmed
+      </span>
+    </div>
+  </section>
+</main>

@@ -1,0 +1,73 @@
+# Dependabot config — Sprint 11.5 Slice 4 (OWASP A06 components).
+#
+# Tracks four ecosystems on a weekly cadence:
+#   * `mix` for Elixir hex deps
+#   * `npm` for the `/assets` Playwright/axe-core devDependencies
+#   * `github-actions` for the workflows pinned to commit SHAs
+#   * `docker` for the Dockerfile base-image digests
+#
+# Each ecosystem opens at most 5 open PRs at a time to keep
+# Dependabot noise manageable; security updates ignore the limit.
+
+version: 2
+
+updates:
+  - package-ecosystem: "mix"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "elixir"
+    commit-message:
+      prefix: "deps(mix)"
+      include: "scope"
+
+  - package-ecosystem: "npm"
+    directory: "/assets"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "npm"
+    commit-message:
+      prefix: "deps(npm)"
+      include: "scope"
+
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "github-actions"
+    commit-message:
+      prefix: "deps(actions)"
+      include: "scope"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "07:00"
+      timezone: "Europe/London"
+    open-pull-requests-limit: 5
+    labels:
+      - "dependencies"
+      - "docker"
+    commit-message:
+      prefix: "deps(docker)"
+      include: "scope"

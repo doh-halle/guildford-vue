@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Email verified · Guildford Vue</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    />
+    <link rel="stylesheet" href={~p"/assets/css/app.css"} />
+  </head>
+  <body>
+    <main class="mx-auto max-w-md px-6 py-16 sm:py-24 text-center">
+      <p class="font-mono text-xs uppercase tracking-widest text-orange-700">Candidate</p>
+      <h1 class="mt-4 font-sans text-3xl font-bold tracking-tight text-ink-900">
+        Email verified ✓
+      </h1>
+      <p class="mt-2 text-sm text-ink-600">
+        Thank you. You can now sign in.
+      </p>
+      <a
+        href={~p"/candidate/login"}
+        class="mt-6 inline-flex items-center gap-2 rounded-lg bg-teal-700 px-6 py-3 font-sans font-semibold text-white shadow-sm transition hover:bg-teal-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-teal-500 focus-visible:ring-offset-2"
+      >
+        Sign in
+      </a>
+    </main>
+  </body>
+</html>

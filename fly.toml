@@ -1,0 +1,54 @@
+# fly.toml — committed but not yet deployed (CI deploy is gated `if: false`).
+# When ready to ship: create the Fly app (`fly apps create guildford-vue`),
+# set required secrets (`fly secrets set …`), then flip the deploy workflow
+# guard or run `flyctl deploy` locally.
+
+app = "guildford-vue"
+primary_region = "lhr"            # London Heathrow
+
+[build]
+  dockerfile = "Dockerfile"
+
+[env]
+  PHX_HOST = "guildfordvue.com"
+  PORT = "4000"
+  ECTO_IPV6 = "true"
+  ERL_AFLAGS = "-proto_dist inet6_tcp"
+
+[experimental]
+  cmd = ["bin/guildford_vue", "start"]
+
+[[services]]
+  internal_port = 4000
+  protocol = "tcp"
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 2
+
+  [[services.ports]]
+    handlers = ["http"]
+    port = 80
+    force_https = true
+
+  [[services.ports]]
+    handlers = ["tls", "http"]
+    port = 443
+
+  [services.concurrency]
+    type = "connections"
+    hard_limit = 2000
+    soft_limit = 1500
+
+[checks.health]
+  type = "http"
+  interval = "30s"
+  timeout = "5s"
+  method = "get"
+  path = "/health"
+
+[checks.ready]
+  type = "http"
+  interval = "60s"
+  timeout = "10s"
+  method = "get"
+  path = "/health/ready"

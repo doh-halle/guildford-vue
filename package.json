@@ -1,0 +1,15 @@
+{
+  "name": "guildford-vue-e2e",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Playwright E2E harness for Guildford Vue. mix phx.server is started by Playwright via playwright.config.ts.",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:critical": "playwright test --grep @critical",
+    "playwright:install": "playwright install --with-deps chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.0",
+    "@axe-core/playwright": "^4.10.0"
+  }
+}

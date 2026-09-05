@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+# .githooks/pre-commit — block commits that leak secrets or env vars.
+#
+# Installed via `scripts/install-git-hooks.sh` which sets
+# `git config core.hooksPath .githooks`. This file is tracked in git so the
+# protection is identical for every contributor.
+
+set -euo pipefail
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+cd "$REPO_ROOT"
+
+if [[ ! -x scripts/secret-scan.sh ]]; then
+  echo "pre-commit: scripts/secret-scan.sh missing or not executable" >&2
+  exit 1
+fi
+
+scripts/secret-scan.sh
