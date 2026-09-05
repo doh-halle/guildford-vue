@@ -89,7 +89,7 @@ defmodule GuildfordVue.MixProject do
       {:sweet_xml, "~> 0.7"},
       {:chromic_pdf, "~> 1.17"},
       {:eqrcode, "~> 0.2"},
-      {:hammer, "~> 6.2"},
+      {:hammer, "~> 7.5"},
       {:libcluster, "~> 3.4"},
       {:prom_ex, "~> 1.11"},
       {:sentry, "~> 10.2"},
