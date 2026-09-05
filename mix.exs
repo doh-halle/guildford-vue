@@ -92,7 +92,7 @@ defmodule GuildfordVue.MixProject do
       {:hammer, "~> 6.2"},
       {:libcluster, "~> 3.4"},
       {:prom_ex, "~> 1.11"},
-      {:sentry, "~> 10.2"},
+      {:sentry, "~> 13.5"},
 
       # --- Quality / static analysis ---
       {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
